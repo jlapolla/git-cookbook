@@ -7,52 +7,6 @@ For general information about BOM's, refer to [this link][1].
 The filters in this section remove the BOM on commit, and add the BOM on
 checkout.
 
-### How it works
-
-All of the filter definitions use variations of the following commands, where
-'abc' is the appropriate BOM byte sequence:
-
-```bash
-# Remove 'abc' from beginning of file
-sed -b -e '1!b' -e 's/^abc//'
-
-# Add 'abc' to beginning of file (if not present)
-sed -b -e '1!b' -e 's/\(^\|^abc\)/abc/'
-```
-
-For a list of BOM byte sequences, refer to [this link][3].
-
-### How to use it
-
-To define a filter, copy and paste the desired filter definitions to a Git
-configuration file (**~/.gitconfig** or **.git/config**).
-
-To use a filter, apply the filter in a **.gitattributes** file. For example:
-
-```bash
-# .gitattributes filter usage example
-*.csproj filter=utf8-autobom
-```
-
-After defining and applying a filter, run these commands to update the files in
-Git:
-
-```bash
-rm .git/index
-git reset
-```
-
-Now `git status` shows modified files that are not staged for commit. `git
-checkout <file>` does not undo the modifications because the checkout itself is
-subject to our filter (unless the checkout also reverts our .gitattributes
-changes). Review the changes using `git diff`, then commit the changes as usual
-with:
-
-```bash
-git add .
-git commit
-```
-
 ### Filter definitions
 
 Copy and paste these into a Git configuration file (**~/.gitconfig** or
@@ -97,6 +51,52 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
         clean = sed -b -e '1!b' -e 's/^\\xFF\\xFE\\x00\\x00//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFF\\xFE\\x00\\x00\\)/\\xFF\\xFE\\x00\\x00/'
 ```
+
+### How to use it
+
+To define a filter, copy and paste the desired filter definitions to a Git
+configuration file (**~/.gitconfig** or **.git/config**).
+
+To use a filter, apply the filter in a **.gitattributes** file. For example:
+
+```bash
+# .gitattributes filter usage example
+*.csproj filter=utf8-autobom
+```
+
+After defining and applying a filter, run these commands to update the files in
+Git:
+
+```bash
+rm .git/index
+git reset
+```
+
+Now `git status` shows modified files that are not staged for commit. `git
+checkout <file>` does not undo the modifications because the checkout itself is
+subject to our filter (unless the checkout also reverts our .gitattributes
+changes). Review the changes using `git diff`, then commit the changes as usual
+with:
+
+```bash
+git add .
+git commit
+```
+
+### How it works
+
+All of the filter definitions use variations of the following commands, where
+'abc' is the appropriate BOM byte sequence:
+
+```bash
+# Remove 'abc' from beginning of file
+sed -b -e '1!b' -e 's/^abc//'
+
+# Add 'abc' to beginning of file (if not present)
+sed -b -e '1!b' -e 's/\(^\|^abc\)/abc/'
+```
+
+For a list of BOM byte sequences, refer to [this link][3].
 
 ## Tips for Vim
 
