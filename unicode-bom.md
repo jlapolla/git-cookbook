@@ -29,7 +29,7 @@ configuration file (**~/.gitconfig** or **.git/config**).
 
 To use a filter, apply the filter in a **.gitattributes** file. For example:
 
-```gitattributes
+```gitignore
 # .gitattributes filter usage example
 *.csproj filter=utf8-autobom
 ```
@@ -60,7 +60,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
 
 #### UTF-8
 
-```gitconfig
+```ini
 [filter "utf8-autobom"]
         clean = sed -b -e '1!b' -e 's/^\\xEF\\xBB\\xBF//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xEF\\xBB\\xBF\\)/\\xEF\\xBB\\xBF/'
@@ -68,7 +68,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
 
 #### UTF-16 big endian
 
-```gitconfig
+```ini
 [filter "utf16be-autobom"]
         clean = sed -b -e '1!b' -e 's/^\\xFE\\xFF//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFE\\xFF\\)/\\xFE\\xFF/'
@@ -76,7 +76,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
 
 #### UTF-16 little endian
 
-```gitconfig
+```ini
 [filter "utf16le-autobom"]
         clean = sed -b -e '1!b' -e 's/^\\xFF\\xFE//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFF\\xFE\\)/\\xFF\\xFE/'
@@ -84,7 +84,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
 
 #### UTF-32 big endian
 
-```gitconfig
+```ini
 [filter "utf32be-autobom"]
         clean = sed -b -e '1!b' -e 's/^\\x00\\x00\\xFE\\xFF//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\x00\\x00\\xFE\\xFF\\)/\\x00\\x00\\xFE\\xFF/'
@@ -92,7 +92,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
 
 #### UTF-32 little endian
 
-```gitconfig
+```ini
 [filter "utf32le-autobom"]
         clean = sed -b -e '1!b' -e 's/^\\xFF\\xFE\\x00\\x00//'
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFF\\xFE\\x00\\x00\\)/\\xFF\\xFE\\x00\\x00/'
