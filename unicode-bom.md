@@ -9,9 +9,6 @@ checkout.
 
 ### Filter definitions
 
-Copy and paste these into a Git configuration file (**~/.gitconfig** or
-**.git/config**).
-
 #### UTF-8
 
 ```ini
