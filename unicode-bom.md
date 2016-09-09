@@ -29,7 +29,7 @@ configuration file (**~/.gitconfig** or **.git/config**).
 
 To use a filter, apply the filter in a **.gitattributes** file. For example:
 
-```gitignore
+```bash
 # .gitattributes filter usage example
 *.csproj filter=utf8-autobom
 ```
