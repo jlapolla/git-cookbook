@@ -24,18 +24,18 @@ For a list of BOM byte sequences, refer to [this link][3].
 
 ### How to use it
 
-To define the filter, copy and paste the desired filter definitions to a Git
+To define a filter, copy and paste the desired filter definitions to a Git
 configuration file (**~/.gitconfig** or **.git/config**).
 
-To use the filter, apply the filter in a **.gitattributes** file. For example:
+To use a filter, apply the filter in a **.gitattributes** file. For example:
 
-```
+```gitattributes
 # .gitattributes filter usage example
 *.csproj filter=utf8-autobom
 ```
 
-After defining the filter and applying it in .gitattributes, run these commands
-to update the files in Git:
+After defining and applying a filter, run these commands to update the files in
+Git:
 
 ```bash
 rm .git/index
@@ -58,7 +58,7 @@ git commit
 Copy and paste these into a Git configuration file (**~/.gitconfig** or
 **.git/config**).
 
-#### UTF-8 (utf8-autobom)
+#### UTF-8
 
 ```gitconfig
 [filter "utf8-autobom"]
@@ -66,7 +66,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xEF\\xBB\\xBF\\)/\\xEF\\xBB\\xBF/'
 ```
 
-#### UTF-16 big endian (utf16be-autobom)
+#### UTF-16 big endian
 
 ```gitconfig
 [filter "utf16be-autobom"]
@@ -74,7 +74,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFE\\xFF\\)/\\xFE\\xFF/'
 ```
 
-#### UTF-16 little endian (utf16le-autobom)
+#### UTF-16 little endian
 
 ```gitconfig
 [filter "utf16le-autobom"]
@@ -82,7 +82,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\xFF\\xFE\\)/\\xFF\\xFE/'
 ```
 
-#### UTF-32 big endian (utf32be-autobom)
+#### UTF-32 big endian
 
 ```gitconfig
 [filter "utf32be-autobom"]
@@ -90,7 +90,7 @@ Copy and paste these into a Git configuration file (**~/.gitconfig** or
         smudge = sed -b -e '1!b' -e 's/\\(^\\|^\\x00\\x00\\xFE\\xFF\\)/\\x00\\x00\\xFE\\xFF/'
 ```
 
-#### UTF-32 little endian (utf32le-autobom)
+#### UTF-32 little endian
 
 ```gitconfig
 [filter "utf32le-autobom"]
